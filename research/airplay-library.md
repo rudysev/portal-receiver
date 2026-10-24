@@ -1,7 +1,7 @@
-# Which AirPlay receiver library should portal-airplay build on?
+# Which AirPlay receiver library should portal-receiver build on?
 
-Research for [rudysev/portal-airplay#2](https://github.com/rudysev/portal-airplay/issues/2), part of
-the map [#1](https://github.com/rudysev/portal-airplay/issues/1). Surveyed 2026-10-23 from primary
+Research for [rudysev/portal-receiver#2](https://github.com/rudysev/portal-receiver/issues/2), part of
+the map [#1](https://github.com/rudysev/portal-receiver/issues/1). Surveyed 2026-10-23 from primary
 sources: the projects' own repositories (READMEs, source, releases, issues), AOSP source and kernel
 documentation. Repository facts (stars, open issues, last commit) were read through the GitHub API on
 that date; every other claim links to the file, release or issue it comes from.
@@ -11,7 +11,7 @@ that date; every other claim links to the file, release or issue it comes from.
 ## Answer
 
 **Build on UxPlay's C core ([FDH2/UxPlay](https://github.com/FDH2/UxPlay)), consumed directly as a
-pinned submodule, with portal-airplay's own Android layer (JNI, MediaCodec, AudioTrack/Oboe, media3
+pinned submodule, with portal-receiver's own Android layer (JNI, MediaCodec, AudioTrack/Oboe, media3
 for HLS).** Use [jqssun/android-airplay-server](https://github.com/jqssun/android-airplay-server) and
 [pgodlews/wormhole-display](https://github.com/pgodlews/wormhole-display) (both GPL-3.0, both UxPlay
 on Android, the second built for Portal) as references to borrow from, not as the base.
@@ -19,7 +19,7 @@ on Android, the second built for Portal) as references to borrow from, not as th
 - No open-source receiver, in any language, does both screen mirroring and true AirPlay 2 audio
   (buffered audio, PTP clock sync, multi-room) in one receiver. UxPlay is the only actively
   maintained project that does mirroring, AirPlay video (HLS), PIN pairing and DACP. Every Android
-  receiver that mirrors, including the one portal-receiver vendored, is UxPlay underneath.
+  receiver that mirrors, including the one portal-receiver-prototype vendored, is UxPlay underneath.
 - **True AirPlay 2 multi-room is not viable on a stock Portal, with any library.** It needs a PTP
   listener on UDP ports 319 and 320. An Android app has no permission to bind ports below 1024, so
   it needs root. Even with root, it would have to run as a second, separate receiver alongside the
@@ -96,7 +96,7 @@ Key: Y = supported, N = not supported, P = partial, WIP = work in progress, - = 
   ([README credits L2540-2576](https://github.com/FDH2/UxPlay/blob/95a0e49561a52e4b52ef59c8e17cdd701509d35a/README.md?plain=1#L2540-L2576)).
   OpenSSL 3 (Apache-2.0) is fine under GPLv3
   ([README L340-343](https://github.com/FDH2/UxPlay/blob/95a0e49561a52e4b52ef59c8e17cdd701509d35a/README.md?plain=1#L340-L343)).
-  portal-airplay is GPL-3.0, so none of this is a problem.
+  portal-receiver is GPL-3.0, so none of this is a problem.
 - **Health.** The latest release is v1.73.7 (2026-09-04), and README version 1.74 (Experimental) is
   on master ([releases](https://github.com/FDH2/UxPlay/releases),
   [README L1-7](https://github.com/FDH2/UxPlay/blob/95a0e49561a52e4b52ef59c8e17cdd701509d35a/README.md?plain=1#L1-L7)).
@@ -135,16 +135,16 @@ Key: Y = supported, N = not supported, P = partial, WIP = work in progress, - = 
   build time, `0001` to `0009`, among them HLS crash fixes, a PIN pairing proof-length fix and
   video-sender compatibility
   ([patches/UxPlay](https://github.com/jqssun/android-airplay-server/tree/a46cca0a6a1274e9e33c0e750f0f1c1eb1d881ea/app/src/main/cpp/patches/UxPlay)).
-  The other submodules are unchanged since portal-receiver's pin: libplist `f41b1ea`,
+  The other submodules are unchanged since portal-receiver-prototype's pin: libplist `f41b1ea`,
   openssl-cmake `4edd36a`, ffmpeg `38b8833`
   ([.gitmodules and tree](https://github.com/jqssun/android-airplay-server/tree/a46cca0a6a1274e9e33c0e750f0f1c1eb1d881ea/app/src/main/cpp)).
   UxPlay fixes reach it as backports, for example
   [PR #71](https://github.com/jqssun/android-airplay-server/pull/71).
-- **Since portal-receiver's pin `b9a590f`.** There are 19 commits. Their messages are one word
+- **Since portal-receiver-prototype's pin `b9a590f`.** There are 19 commits. Their messages are one word
   ("volume", "api", "pin", "decoder") and add orientation detection, a USB-only mode, software
   AAC, ADB settings and a PIN change (`gh api compare b9a590f...main`).
 - **Health.** `jqssun` wrote 46 of the commits; no one else has more than 5. About 19 community PRs
-  are open and unmerged, including #15, #21 and #22, which portal-receiver was waiting on and which
+  are open and unmerged, including #15, #21 and #22, which portal-receiver-prototype was waiting on and which
   have been open since 2026-07-07
   ([open PRs](https://github.com/jqssun/android-airplay-server/pulls)).
 - **Open bugs that matter here.**
@@ -156,11 +156,11 @@ Key: Y = supported, N = not supported, P = partial, WIP = work in progress, - = 
     ([#72](https://github.com/jqssun/android-airplay-server/issues/72)).
   - SELinux denies `/dev/ashmem` on some devices
     ([#50](https://github.com/jqssun/android-airplay-server/issues/50)).
-- **Lesson from portal-receiver.** To keep the vendored app syncable, portal-receiver had to leave
+- **Lesson from portal-receiver-prototype.** To keep the vendored app syncable, portal-receiver-prototype had to leave
   the package name alone, push its options through SharedPreferences ("the indirection is the
   point"), and patch hard references to `MainActivity`
-  ([portal-receiver IMMORTAL-PORT.md section 2](https://github.com/rudysev/portal-receiver/blob/main/IMMORTAL-PORT.md),
-  [airplay/UPSTREAM.md](https://github.com/rudysev/portal-receiver/blob/main/airplay/UPSTREAM.md)).
+  ([portal-receiver-prototype IMMORTAL-PORT.md section 2](https://github.com/rudysev/portal-receiver-prototype/blob/main/IMMORTAL-PORT.md),
+  [airplay/UPSTREAM.md](https://github.com/rudysev/portal-receiver-prototype/blob/main/airplay/UPSTREAM.md)).
   That cost comes from vendoring an app rather than a library.
 
 ### shairport-sync (+ NQPTP)
@@ -222,7 +222,7 @@ Key: Y = supported, N = not supported, P = partial, WIP = work in progress, - = 
   - Its vendored UxPlay patches are worth taking: bounds checks, legacy RSA RAOP, and a unique mDNS
     hostname, needed because `gethostname()` returns "localhost" on Android
     ([uxplay-patches.md](https://github.com/pgodlews/wormhole-display/blob/2bc203e2ef4c3f672e64ea2173dbfb552552097e/docs/uxplay-patches.md)).
-  - It has 18 commits from 1 maintainer. It is the closest prior art to portal-airplay, and it is a
+  - It has 18 commits from 1 maintainer. It is the closest prior art to portal-receiver, and it is a
     competitor on the same hardware.
 - **[metaneutrons/shairplay-rust](https://github.com/metaneutrons/shairplay-rust)** (LGPL-3.0,
   clean-room safe Rust, pre-1.0).
@@ -346,16 +346,16 @@ the recommendation.
 ## Recommendation and trade-offs
 
 **Base: the UxPlay C core (`lib/`), as a pinned submodule of `FDH2/UxPlay` itself.** On top of it,
-portal-airplay's own native glue and Kotlin layer: MediaCodec video, AudioTrack/Oboe audio, media3
+portal-receiver's own native glue and Kotlin layer: MediaCodec video, AudioTrack/Oboe audio, media3
 for HLS, and the Receiver's own UI and Contract.
 
 Why this base:
 
 - UxPlay is the only maintained engine that covers mirroring, the mirroring-to-video Handover
-  (HLS), PIN and DACP. It is proven on a Gen-2 Portal through portal-receiver.
+  (HLS), PIN and DACP. It is proven on a Gen-2 Portal through portal-receiver-prototype.
 - Taking UxPlay directly instead of through jqssun removes a lagging middleman. jqssun is 97 commits
   behind and fixes reach it as backports. Taking UxPlay directly also avoids the friction
-  portal-receiver documented from vendoring an app. Upstream has accepted Android-oriented PRs.
+  portal-receiver-prototype documented from vendoring an app. Upstream has accepted Android-oriented PRs.
 - GPL-3.0 matches the project's licence.
 
 What to borrow (GPL-3.0, with attribution):
@@ -379,7 +379,7 @@ Trade-offs accepted:
 Alternatives considered and rejected:
 
 - **Fork jqssun's app.** Fastest start, but it is an app rather than a library, it is maintained by
-  one person, its PR backlog is unmerged, and it repeats portal-receiver's sync friction.
+  one person, its PR backlog is unmerged, and it repeats portal-receiver-prototype's sync friction.
 - **shairport-sync.** No video, and AirPlay 2 needs root.
 - **shairplay-rust or rairplay.** Mirroring is WIP or not decoded; no Android proof.
 - **PhairPlay.** Beta, its licence is inconsistent, and it has no buffered audio.
@@ -397,8 +397,8 @@ Alternatives considered and rejected:
    Portal models (Gen-1 Portal+ on Android 9, Gen-2, TV) have a hardware `video/hevc` MediaCodec
    decoder, and what should the Receiver advertise per model?
 2. **mDNS advertisement path on API 28-29.** wormhole-display says NsdManager cannot publish the TXT
-   records AirPlay needs before API 31, and uses UxPlay's internal responder. portal-receiver's
-   NsdManager-based discovery did register on a Gen-2 Portal. Which path does portal-airplay use,
+   records AirPlay needs before API 31, and uses UxPlay's internal responder. portal-receiver-prototype's
+   NsdManager-based discovery did register on a Gen-2 Portal. Which path does portal-receiver use,
    and does the Gen-1 Portal+ agree?
 3. **Scope of AirPlay video beyond YouTube.** UxPlay's HLS is officially YouTube-app-only.
    jqssun's open issues show other apps failing (TikTok handover #73, playlist query strings #79).
