@@ -124,12 +124,19 @@ Trace: [`traces/omni/sender-lock-and-screensaver.log`](traces/omni/sender-lock-a
   - With Immortal, Immortal must also not redream while a Session is active. It reads that from the session-active signal in #5's capability list, and `DreamPolicy` treats it like its existing `SUPPRESSED` case (the Calls handoff). For #7 and #8.
   - The Receiver's own screen-on wake from a background Session is still untested on the probe.
 
+### Test 5: discovery after a Wi-Fi reconnect
+
+Wi-Fi toggled over USB (`svc wifi disable` / `enable`) and the Portal queried directly with one-shot mDNS queries ([`mdns_probe.py`](mdns_probe.py)) sent from an ordinary UDP port, so it answers by unicast and the Mac's mDNS cache isn't involved (`dns-sd -B` on the Mac is useless here, see below).
+
+- **Discovery recovers by itself.** There were no answers while Wi-Fi was off. The IP was back 7 s after enabling, `_airplay._tcp` answered at 13 s and `_raop._tcp` at 14 s. The probe logged nothing: Android's own mDNS daemon re-announces existing `NsdManager` registrations when the interface returns, so the Receiver needs no re-registration logic for this case. Port 7000 accepted connections on the new link.
+- **There's no goodbye on the way down.** A `dns-sd -B` browse on the Mac running across the toggle never showed the Portal leave (no `Rmv`): turning Wi-Fi off sends no TTL-0 goodbye, so Senders keep a stale "Portal" entry until their cache expires. That's harmless for a reconnect, but a Sender may offer a Portal that isn't there.
+
 ### Not testable here
 
 - **Snapcast audio focus:** stock Snapcast isn't installed on the Portal 10" or the Portal TV.
 
 ### Still to do
 
-- First-connect delay to a sleeping Portal; discovery after a Wi-Fi reconnect.
+- First-connect delay to a sleeping Portal.
 - Device trace: Sender walks out of Wi-Fi range.
 - Re-run the screensaver case with a screen-on wake in the probe.
