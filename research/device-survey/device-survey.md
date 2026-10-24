@@ -105,13 +105,26 @@ Trace: [`traces/omni/youtube-handover-ads.log`](traces/omni/youtube-handover-ads
   107.497  Client disconnected (4) ... (3) ... (2) ... (1)           <- every connection closed
   ```
 
-  In every transition that worked, the Sender stopped the item itself ("AirPlay Video stopped" without "(player)") and then sent the next one. Here the local player reached end-of-stream first. The probe's `onEnded` called `_endVideoPlayback` (`AirPlayService.kt:277`), which stops the player. The Sender's next `/playback-info` poll then got `duration == -1`, which UxPlay treats as "video has finished, reset": it marks the response to disconnect and resets with `RESET_TYPE_HLS_SHUTDOWN` (`lib/http_handlers.h:391-398` in UxPlay 1.73.7). That tears down the Sender's whole connection, so the queued second ad never arrives. **Lessons:**
+  In every transition that worked, the Sender stopped the item itself ("AirPlay Video stopped" without "(player)") and then sent the next one. Here the local player reached end-of-stream first. The probe's `onEnded` called `_endVideoPlayback` (`AirPlayService.kt:277`), which stops the player. The Sender's next `/playback-info` poll then got `duration == -1`, which UxPlay treats as "video has finished, reset": it marks the response to disconnect and resets with `RESET_TYPE_HLS_SHUTDOWN` (`lib/http_handlers.h:392-398`; identical in the probe's UxPlay 1.73.6 and in 1.73.7 at the pinned `df67c21`). That tears down the Sender's whole connection, so the queued second ad never arrives. **Lessons:**
   - For the Session (#6), the end of an HLS item on the Portal is not the end of the Session. The Sender owns the queue: on local end-of-stream the Receiver keeps reporting the finished item (position = duration, rate 0) and waits for the Sender's next `/play` or `/stop`, inside #6's grace window.
   - For the engine patch series, `/playback-info` must never answer `duration -1` while the Sender's item is still current. This is a candidate patch to `patches/uxplay/`, alongside the inherited 0001-0005, and is worth offering upstream.
   - This trace is the fixture for it.
 
-### Still to do (needs a Sender)
-- Whether stock Snapcast pauses on losing audio focus.
+### Test 4: Sender locks its screen mid-Session, and Immortal's screensaver
+
+Trace: [`traces/omni/sender-lock-and-screensaver.log`](traces/omni/sender-lock-and-screensaver.log) (times relative to the surface launch).
+
+- **A lock is a pause, not a Session end.** During mirroring, locking the iPhone sent `video_pause` (41.0) and unlocking it sent `video_resume` 15 s later (56.4). The connection held throughout and the picture came back by itself. During an audio Session the lock produced no events at all and the music kept playing. The ALAC stream was decoded in software (`ALAC: software decoder (ffmpeg) (forced)`), matching the missing ALAC decoder above.
+- **Bug: the Receiver's surface can't appear over Immortal's screensaver.** Immortal's screensaver is an Android Dream (`PhotoDreamService`), and the system draws a Dream above every activity. On connect the probe brought its activity forward (`am_new_intent`, resumed at 0.07 s), but it was stopped 0.1 s later with reason **`sleeping`**. It stayed hidden until the user tapped the Portal (`ImmortalDream: onExit (tap)`, `Stopping dream` at 5.28 s), and then resumed 0.1 s after the Dream ended. So something has to end the Dream when a Session wants the screen. Two candidate routes, both for #7, #8 and #13 to settle:
+  - Immortal ends its own Dream when the Contract reports a Session (the session-active signal #4 called for). This works only when Immortal is present.
+  - The Receiver wakes the device itself with a screen-on wake (`FLAG_TURN_SCREEN_ON` on the Surface, or a wake lock with `ACQUIRE_CAUSES_WAKEUP`), which normally ends a Dream. This would also cover the standalone case. **Untested**: it needs a probe change.
+
+### Not testable here
+
+- **Snapcast audio focus:** stock Snapcast isn't installed on the Portal 10" or the Portal TV.
+
+### Still to do
+
 - First-connect delay to a sleeping Portal; discovery after a Wi-Fi reconnect.
-- Rotation and scaling: portrait iPhone mirroring, landscape video.
-- Device traces: YouTube Handover, YouTube ad break, Sender screen lock mid-Session, Sender out of Wi-Fi range, audio-only Session ending.
+- Device trace: Sender walks out of Wi-Fi range.
+- Re-run the screensaver case with a screen-on wake in the probe.

@@ -1,0 +1,34 @@
+0.000 1194 1210 I am_new_intent: [0,214325327,1328,com.portal.receiver/io.github.jqssun.airplay.MainActivity,NULL,NULL,NULL,268435456]
+0.003 1194 1210 I am_set_resumed_activity: [0,com.portal.receiver/io.github.jqssun.airplay.MainActivity,resumeTopActivityInnerLocked]
+0.074 9587 9587 I am_on_resume_called: [0,io.github.jqssun.airplay.MainActivity,RESUME_ACTIVITY]
+0.174 9587 9587 I am_on_stop_called: [0,io.github.jqssun.airplay.MainActivity,sleeping]
+5.281 2210 2210 I ImmortalDream: onExit (tap) -> finish()
+5.283 1194 1213 I DreamController: Stopping dream: name=ComponentInfo{com.immortal.launcher/com.immortal.launcher.PhotoDreamService}, isTest=false, canDoze=false, userId=0
+5.297 2210 2210 I ImmortalDream: dream stopped; verdict = USER_EXIT
+5.361 2210 2210 I ImmortalDream: onDreamingStopped
+5.389 1194 1214 I am_set_resumed_activity: [0,com.portal.receiver/io.github.jqssun.airplay.MainActivity,resumeTopActivityInnerLocked]
+5.475 9587 9587 I am_on_resume_called: [0,io.github.jqssun.airplay.MainActivity,RESUME_ACTIVITY]
+41.002 9587 11107 I AirPlayNative: video_pause
+41.014 9587 11107 I AirPlayService: Video size: 370.0x800.0 -> 370.0x800.0
+41.254 9587 11107 I AirPlayService: Video size: 370.0x800.0 -> 370.0x800.0
+56.367 9587 11107 I AirPlayNative: video_resume
+56.378 9587 11107 I AirPlayService: Video size: 370.0x800.0 -> 370.0x800.0
+63.576 9587 11107 I AirPlayNative: mirror running: 0
+63.579 9587 11107 I AirPlayService: Audio mode
+63.599 9587 9617 I AirPlayService: Client disconnected (0)
+63.602 9587 9617 I AirPlayNative: video_flush
+68.052 9587 9617 I AirPlayService: Client connected (1)
+68.061 1194 1211 I am_new_intent: [0,214325327,1328,com.portal.receiver/io.github.jqssun.airplay.MainActivity,NULL,NULL,NULL,268435456]
+68.070 9587 9587 I am_on_resume_called: [0,io.github.jqssun.airplay.MainActivity,LIFECYCLER_RESUME_ACTIVITY]
+70.589 9587 9617 I AirPlayNative: Oboe out: AAudio, mmap=no, buffer=1920/3844 frames, burst=960, 44100 Hz
+70.599 9587 9617 I AirPlayService: Audio mode
+70.602 9587 9617 I AirPlayService: Audio format: ct=2 spf=352 screen=false
+70.609 9587 11213 I AirPlayService: DACP: <dacp-id>
+70.653 9587 11213 I AirPlayNative: audio_flush
+70.706 9587 9614 I DacpController: DACP resolved: <lan-ip>
+72.752 9587 11213 I AirPlayNative: Oboe out: AAudio, mmap=no, buffer=3536/3536 frames, burst=1768, 44100 Hz
+72.785 9587 11213 I AirPlayNative: ALAC: software decoder (ffmpeg) (forced)
+82.578 9587 9587 I am_on_stop_called: [0,io.github.jqssun.airplay.MainActivity,STOP_ACTIVITY_ITEM]
+85.558 9587 11213 I AirPlayNative: audio_flush
+97.331 9587 9617 I AirPlayService: Client disconnected (0)
+97.335 9587 9617 I AirPlayNative: video_flush
