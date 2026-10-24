@@ -1,0 +1,69 @@
+0.000 5011 5072 I AirPlayService: Client connected (1)
+0.624 2210 2505 I ImmortalNowPlaying: now-playing: — —
+0.624 2210 2505 I ImmortalNowPlaying: sessions=0 chosen=null state=null
+0.661 5011 5072 I AirPlayService: Audio mode
+0.662 5011 5072 I AirPlayService: Audio format: ct=2 spf=352 screen=false
+0.671 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=null state=null
+0.672 2210 2505 I ImmortalNowPlaying: now-playing: — —
+0.673 5011 7638 I AirPlayService: DACP: <dacp-id>
+1.038 5011 5050 I DacpController: DACP resolved: <lan-ip>
+2.510 2210 2505 I ImmortalNowPlaying: now-playing: — —
+2.510 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=null state=null
+2.561 2210 2505 I ImmortalNowPlaying: now-playing: — —
+2.561 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=null state=null
+2.616 5011 7638 I AirPlayService: Track: Austin Wintory - Apotheosis
+2.629 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+2.637 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+8.825 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+8.825 5011 7638 I AirPlayService: Track: Austin Wintory - Apotheosis
+8.836 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+8.852 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+8.870 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+21.922 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+21.930 2210 2505 I ImmortalNowPlaying: now-playing: PAUSED Austin Wintory — Apotheosis
+22.192 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+22.196 2210 2505 I ImmortalNowPlaying: now-playing: PAUSED Austin Wintory — Apotheosis
+22.214 5011 7638 I AirPlayService: Track: Austin Wintory - Apotheosis
+22.223 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+22.234 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+22.236 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+22.240 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+35.801 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+35.809 2210 2505 I ImmortalNowPlaying: now-playing: PAUSED Austin Wintory — Apotheosis
+38.595 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+38.600 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+39.891 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+39.897 5011 7638 I AirPlayService: Track: Austin Wintory - Apotheosis
+39.912 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+39.919 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+39.923 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+41.065 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+41.068 2210 2505 I ImmortalNowPlaying: now-playing: PAUSED Austin Wintory — Apotheosis
+41.299 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+41.303 2210 2505 I ImmortalNowPlaying: now-playing: PAUSED Austin Wintory — Apotheosis
+41.334 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+41.335 5011 7638 I AirPlayService: Track: Austin Wintory - Apotheosis
+41.355 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+41.359 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+41.365 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+43.043 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+43.054 2210 2505 I ImmortalNowPlaying: now-playing: PAUSED Austin Wintory — Apotheosis
+44.316 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+44.320 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+45.501 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+45.504 5011 7638 I AirPlayService: Track: Austin Wintory - Apotheosis
+45.505 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+45.512 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+45.517 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+52.443 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+52.449 2210 2505 I ImmortalNowPlaying: now-playing: PAUSED Austin Wintory — Apotheosis
+52.671 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=2
+52.691 5011 7638 I AirPlayService: Track: Austin Wintory - Apotheosis
+52.701 2210 2505 I ImmortalNowPlaying: now-playing: PAUSED Austin Wintory — Apotheosis
+52.712 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+52.716 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+52.718 2210 2505 I ImmortalNowPlaying: sessions=1 chosen=com.portal.receiver state=3
+52.724 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+58.847 2210 2505 I ImmortalNowPlaying: now-playing: — —
+58.847 2210 2505 I ImmortalNowPlaying: sessions=0 chosen=null state=null
+58.853 5011 5072 I AirPlayService: Client disconnected (0)
