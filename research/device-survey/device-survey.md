@@ -6,9 +6,9 @@ What each Portal model can actually do as a receiver, measured on real hardware 
 
 | Model | Codename | Android | Available | Status |
 | --- | --- | --- | --- | --- |
-| Portal 10" (Gen2) | `omni` | 10 (API 29) | yes, USB to the survey Mac | non-interactive part done |
+| Portal 10" (Gen2) | `omni` | 10 (API 29) | yes, USB to the survey Mac | done, except a truly sleeping Portal |
 | Portal+ (Gen1) | `aloha` | 9 (API 28) | yes, on another machine | not started |
-| Portal TV | `ripley` | 9 (API 28) | yes, Wi-Fi adb, on another machine | not started |
+| Portal TV | `ripley` | 9 (API 28) | yes, Wi-Fi adb from the survey Mac | non-interactive part done; probe not installed |
 | Portal+ (Gen2), Mini, Go | | 10 | not available | won't be surveyed |
 
 A "Portal+" receiver is also advertising on the survey LAN (192.168.86.74, `Android-2.local`) running the probe; it has no adb over Wi-Fi.
@@ -147,6 +147,14 @@ The user turned the iPhone's Wi-Fi off during an audio Session (a stand-in for w
   - the Session must watch the `/feedback` heartbeat;
   - it must decide what a missed-heartbeat timeout does. For example, it could release Screen and Speaker ownership after about 15 s but hold the connection a while longer so a returning Sender still recovers seamlessly, or it could end the Session.
   - These traces are the fixtures: the short outage must not end anything, and a long one must.
+
+## Portal TV (`ripley`)
+
+Measured 2026-10-24 over Wi-Fi adb. Build `Facebook/ripley_prod/ripley:9/PKQ1.191202.001/2041515800015050:user/prod-keys`, Android 9 (API 28), Qualcomm `msm8998` (Snapdragon 835), ABIs `arm64-v8a,armeabi-v7a,armeabi`. **The probe isn't installed**, so the interactive tests haven't run here yet.
+
+- **Decoders** (`/vendor/etc/media_codecs.xml` and `media_codecs_vendor.xml`, identical): hardware `OMX.qcom.video.decoder.hevc`, `.avc` and `.vp9` at up to 4096x2160 and 240 fps (secure variants at 3840x2160 and 30 fps), plus Google software fallbacks. Audio: AAC, FLAC (also `OMX.qti.audio.decoder.flac`). **No ALAC decoder**, the same as Gen2.
+- **Display:** HDMI mode 3840x2160 at 60 Hz (the only mode), with the UI running at an override of **1920x1080** at 320 dpi and scaled up. By Test 2d's lesson, the advertisement should be the logical 1920x1080, with no rotation to handle. Whether advertising the full 3840x2160 works better (4K mirroring, and HEVC if the >1080p hypothesis holds) is a test for when the probe is installed.
+- **Volume:** `mUseFixedVolume=false`.
 
 ### Not testable here
 
