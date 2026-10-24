@@ -1,0 +1,26 @@
+0.000 8405 8437 I AirPlayService: Client connected (1)
+0.021 1194 1355 I ActivityTaskManager: START u0 {flg=0x10020000 cmp=com.portal.receiver/io.github.jqssun.airplay.MainActivity} from uid 10002
+0.022 1194 1355 W ActivityTaskManager: Background activity start for com.portal.receiver allowed because SYSTEM_ALERT_WINDOW permission is granted.
+0.123 8405 8437 I AirPlayNative: mirror running: 1
+0.258 8405 8567 I AirPlayService: Video size: 592.0x1280.0 -> 592.0x1280.0
+0.261 8405 8567 I AirPlayNative: video_set_codec: 2 (h265_enabled=1)
+0.347 8405 8571 D SurfaceUtils: set up nativeWindow <ptr> for 592x1280, color 0x7fa30c06, rotation 0, usage 0x20002900
+0.353 8405 8567 I VideoRenderer: Video codec started: video/hevc 592x1280 (H.265 (OMX.qcom.video.decoder.hevc))
+0.396 8405 8571 D SurfaceUtils: set up nativeWindow <ptr> for 592x1280, color 0x7fa30c06, rotation 0, usage 0x20002900
+11.085 8405 8567 I AirPlayService: Video size: 800.0x1280.0 -> 800.0x1280.0
+11.105 8405 8437 I AirPlayNative: Oboe out: AAudio, mmap=no, buffer=1920/3844 frames, burst=960, 44100 Hz
+11.114 8405 8437 I AirPlayService: Audio format: ct=8 spf=480 screen=true
+11.125 8405 8571 D SurfaceUtils: set up nativeWindow <ptr> for 800x1280, color 0x7fa30c06, rotation 0, usage 0x20002900
+11.128 8405 8583 I AirPlayService: DACP: <dacp-id>
+19.691 8405 8567 I AirPlayService: Video size: 592.0x1280.0 -> 592.0x1280.0
+19.728 8405 8571 D SurfaceUtils: set up nativeWindow <ptr> for 592x1280, color 0x7fa30c06, rotation 0, usage 0x20002900
+26.562 8405 8437 I AirPlayService: Audio format: ct=8 spf=480 screen=true
+26.572 8405 8596 I AirPlayService: DACP: <dacp-id>
+26.600 8405 8567 I AirPlayService: Video size: 800.0x1280.0 -> 800.0x1280.0
+26.622 8405 8571 D SurfaceUtils: set up nativeWindow <ptr> for 800x1280, color 0x7fa30c06, rotation 0, usage 0x20002900
+36.369 8405 8567 I AirPlayService: Video size: 592.0x1280.0 -> 592.0x1280.0
+36.404 8405 8571 D SurfaceUtils: set up nativeWindow <ptr> for 592x1280, color 0x7fa30c06, rotation 0, usage 0x20002900
+41.874 8405 8567 I AirPlayNative: mirror running: 0
+41.876 8405 8567 I AirPlayService: Audio mode
+41.920 8405 8437 I AirPlayService: Client disconnected (0)
+41.922 8405 8437 I AirPlayNative: video_flush

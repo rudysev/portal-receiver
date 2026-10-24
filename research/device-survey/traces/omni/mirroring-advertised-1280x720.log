@@ -1,0 +1,25 @@
+0.000 9108 9139 I AirPlayService: Client connected (1)
+0.016 1194 5285 I ActivityTaskManager: START u0 {flg=0x10020000 cmp=com.portal.receiver/io.github.jqssun.airplay.MainActivity} from uid 10002
+0.188 9108 9139 I AirPlayNative: mirror running: 1
+0.330 9108 9353 I AirPlayService: Video size: 334.0x720.0 -> 334.0x720.0
+0.340 9108 9353 I AirPlayNative: video_set_codec: 1 (h265_enabled=1)
+0.530 9108 9357 D SurfaceUtils: set up nativeWindow <ptr> for 334x720, color 0x7fa30c06, rotation 0, usage 0x20002900
+0.537 9108 9353 I VideoRenderer: Video codec started: video/avc 334x720 (H.264 (OMX.qcom.video.decoder.avc))
+0.562 9108 9357 D SurfaceUtils: set up nativeWindow <ptr> for 336x720, color 0x7fa30c06, rotation 0, usage 0x20002900
+26.619 9108 9353 I AirPlayService: Video size: 1280.0x720.0 -> 1280.0x720.0
+26.649 9108 9357 D SurfaceUtils: set up nativeWindow <ptr> for 1280x720, color 0x7fa30c06, rotation 0, usage 0x20002900
+26.671 9108 9139 I AirPlayNative: Oboe out: AAudio, mmap=no, buffer=1920/3844 frames, burst=960, 44100 Hz
+26.681 9108 9139 I AirPlayService: Audio format: ct=8 spf=480 screen=true
+26.687 9108 9378 I AirPlayService: DACP: <dacp-id>
+32.907 9108 9353 I AirPlayService: Video size: 334.0x720.0 -> 334.0x720.0
+32.944 9108 9357 D SurfaceUtils: set up nativeWindow <ptr> for 336x720, color 0x7fa30c06, rotation 0, usage 0x20002900
+38.893 9108 9139 I AirPlayService: Audio format: ct=8 spf=480 screen=true
+38.900 9108 9428 I AirPlayService: DACP: <dacp-id>
+38.912 9108 9353 I AirPlayService: Video size: 1280.0x720.0 -> 1280.0x720.0
+38.952 9108 9357 D SurfaceUtils: set up nativeWindow <ptr> for 1280x720, color 0x7fa30c06, rotation 0, usage 0x20002900
+48.495 9108 9353 I AirPlayService: Video size: 334.0x720.0 -> 334.0x720.0
+48.527 9108 9357 D SurfaceUtils: set up nativeWindow <ptr> for 336x720, color 0x7fa30c06, rotation 0, usage 0x20002900
+54.079 9108 9353 I AirPlayNative: mirror running: 0
+54.081 9108 9353 I AirPlayService: Audio mode
+54.141 9108 9139 I AirPlayService: Client disconnected (0)
+54.149 9108 9139 I AirPlayNative: video_flush

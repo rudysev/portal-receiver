@@ -32,7 +32,7 @@ So **hardware HEVC is present**, well above anything a Sender will send this pan
 
 ### Display
 
-800x1280 at 60 Hz, 160 dpi, one mode, `BUILT_IN`, rotation 0 as reported. The panel is natively **portrait**; the landscape UI is a rotation on top. Whether video needs its own rotation or scaling stage is still to be checked with a mirroring Session.
+Panel 800x1280 at 60 Hz, 160 dpi, one mode, `BUILT_IN`: natively **portrait**. As surveyed it stood landscape: `mCurrentRotation=ROTATION_90`, logical 1280x800, with auto-rotate on (`accelerometer_rotation=1`), so the logical size changes when someone turns the Portal. `dumpsys display`'s `mBaseDisplayInfo` (rotation 0, 800x1280) is the unrotated base and is the wrong number to advertise. See Test 2b.
 
 ### Start at boot
 
@@ -62,9 +62,37 @@ Trace: [`traces/omni/audio-session-pause.log`](traces/omni/audio-session-pause.l
 
   The pauses with no update after them (35.8, 43.0) stayed paused. Cause in the probe: `onProgress` sets `_playing = true` unconditionally (`AirPlayService.kt:675` in the prototype), and `togglePlayPause` flips a local guess. **Lesson for the new Session (#6):** "playing" must come from the Sender's real transport state (RECORD/FLUSH and whether audio is flowing), never be inferred from progress or metadata, and a locally initiated play/pause is only optimistic until the Sender confirms it. This trace is the fixture for that.
 
+### Test 2: mirroring with the probe as installed (nothing rendered)
+
+The Session ran (`mirror running: 1`, hardware HEVC `OMX.qcom.video.decoder.hevc` started 0.7 s after connect, audio `ct=8` AAC-ELD alongside) but nothing appeared, because this probe build had `launch_on_connect=false`: it was built to wait for Immortal to raise its surface, and the Immortal on this Portal has no such integration. No activity start was attempted. A probe setting, not a platform result.
+
+### Test 2b: mirroring with launch-on-connect on
+
+Trace: [`traces/omni/mirroring-launch-rotation.log`](traces/omni/mirroring-launch-rotation.log).
+
+- **The Receiver can raise its own surface from the background on Gen2, given the overlay permission.** 21 ms after connect: `Background activity start for com.portal.receiver allowed because SYSTEM_ALERT_WINDOW permission is granted.` The probe had `SYSTEM_ALERT_WINDOW` granted (`appops`: allow). Decoder started at 0.35 s; picture appeared quickly and was smooth and responsive. Input for #13, which asks about the route *without* that permission; this measures the route with it.
+- **MediaCodec straight to the display Surface is enough** for portrait-shaped content: no extra rendering stage was needed for it.
+- **Rotation: the Sender never sent a landscape stream.** Turning the iPhone sideways (portrait and landscape videos in Photos) didn't change the Portal's picture. The stream only alternated between 592x1280 (the phone's screen fitted to height) and 800x1280 (video playing), both portrait, because the probe advertised the **unrotated panel size, 800x1280**, while the Portal stood landscape at 1280x800. The Sender fits whatever it shows into the frame the receiver advertises. **Lesson:** advertise the display at its current logical size (rotation applied) at Session start. Because Gen2 auto-rotates, a rotation during a Session can't be renegotiated mid-stream. It needs either a fixed orientation for the Surface during a Session or a re-advertise on the next Session (to decide in the UI and Surface work).
+
+### Tests 2c and 2d: what to advertise
+
+The probe was switched off `auto_res` to a fixed advertised size, then mirrored again with the same steps. Traces: [`mirroring-advertised-1280x720.log`](traces/omni/mirroring-advertised-1280x720.log), [`mirroring-advertised-1280x800.log`](traces/omni/mirroring-advertised-1280x800.log).
+
+| Advertised | Phone upright | Video playing | Codec the iPhone chose | What the Portal showed |
+| --- | --- | --- | --- | --- |
+| 800x1280 (2b, `auto_res`) | 592x1280 | 800x1280 | HEVC | portrait frame: landscape video tiny |
+| 1280x720 (2c) | 334x720 | 1280x720 | H.264 | landscape video landscape; thin bars (16:9 on 16:10), portrait video softer |
+| **1280x800 (2d)** | 370x800 | 1280x800 | H.264 | **landscape and portrait video both look great** |
+
+- **The phone's own rotation never matters.** In every run the frame only changed when a video started or stopped, never when the phone was turned: the Sender fits whatever it shows into the advertised frame. With the right advertisement, no rotation or scaling stage is needed on Gen2, and MediaCodec straight to the Surface is enough (#6).
+- **Advertise the exact logical display size at the current rotation**, here 1280x800.
+- **Codec depends on the advertisement.** The iPhone sent HEVC only when the advertised frame was 1280 tall, and H.264 at 720 and 800 tall. Hypothesis: iOS uses HEVC only above 1080p. Either way the Receiver can't count on HEVC and must handle both (both have hardware decoders here).
+
+The probe was left advertising 1280x800 with launch-on-connect on for the remaining tests.
+
 ### Still to do (needs a Sender)
 
-- Mirroring end to end; the mirroring -> AirPlay video Handover with YouTube, including the ad-break decoder fault.
+- The mirroring -> AirPlay video Handover with YouTube, including the ad-break decoder fault.
 - Whether stock Snapcast pauses on losing audio focus.
 - First-connect delay to a sleeping Portal; discovery after a Wi-Fi reconnect.
 - Rotation and scaling: portrait iPhone mirroring, landscape video.
