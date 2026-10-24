@@ -131,12 +131,28 @@ Wi-Fi toggled over USB (`svc wifi disable` / `enable`) and the Portal queried di
 - **Discovery recovers by itself.** There were no answers while Wi-Fi was off. The IP was back 7 s after enabling, `_airplay._tcp` answered at 13 s and `_raop._tcp` at 14 s. The probe logged nothing: Android's own mDNS daemon re-announces existing `NsdManager` registrations when the interface returns, so the Receiver needs no re-registration logic for this case. Port 7000 accepted connections on the new link.
 - **There's no goodbye on the way down.** A `dns-sd -B` browse on the Mac running across the toggle never showed the Portal leave (no `Rmv`): turning Wi-Fi off sends no TTL-0 goodbye, so Senders keep a stale "Portal" entry until their cache expires. That's harmless for a reconnect, but a Sender may offer a Portal that isn't there.
 
+### Test 6: connecting to a "sleeping" Portal
+
+Trace: [`traces/omni/presence-wake-and-short-wifi-loss.log`](traces/omni/presence-wake-and-short-wifi-loss.log) (times relative to putting the Portal to sleep).
+
+- **The Portal didn't stay asleep.** 8.8 s after `KEYCODE_SLEEP`, the Portal woke itself: `Waking up from Dozing (uid=10004, reason=WAKE_REASON_APPLICATION, details=Full_Wakeup_PresenceManager)`. That's Meta's camera-based presence detection, and it went straight back to the screensaver. So in normal use a Portal with someone in view is awake, and the measured result applies to that case. "Portal" was in the iPhone's list straight away, and sound started in under 1 s from the connect (`Client connected` to `Audio format` 0.6 s).
+- **A truly sleeping Portal is still untested.** It would need nobody in front of the camera for the whole test.
+
+### Test 7: the Sender loses Wi-Fi (short and long)
+
+The user turned the iPhone's Wi-Fi off during an audio Session (a stand-in for walking out of range). Traces: [`traces/omni/presence-wake-and-short-wifi-loss.log`](traces/omni/presence-wake-and-short-wifi-loss.log) (short outage), [`traces/omni/long-wifi-loss.log`](traces/omni/long-wifi-loss.log) (3 minutes).
+
+- **Recovery is automatic.** Sound stopped within about 1 s of Wi-Fi going off and came back within about 2 s of it returning, with no re-selecting "Portal". That held after a 3-minute outage too. The iPhone resumed on the **same connections**: there was no disconnect, reconnect or flush.
+- **Bug: the Receiver never notices a Sender has gone.** Across both outages the receiver logged **no events at all**, and Immortal's now-playing showed `PLAYING` for the whole 3 minutes. A Sender POSTs `/feedback` every 2 s as a heartbeat. Desktop UxPlay counts the missed heartbeats and resets after 15 s of silence (`MISSED_FEEDBACK_LIMIT`, `uxplay.cpp:84,535-553`), but that logic is in UxPlay's desktop app layer, not in `lib/`, and the probe's Android layer ignores the heartbeat (`_conn_feedback` is a no-op, `android_raop_callbacks.c:241`). With the decisions already made (an active Session holds the speaker and keeps Immortal's screensaver from redreaming), a Sender that leaves for good would leave a **phantom Session that keeps the Portal awake and the speaker owned indefinitely**. **Lesson for #6 and #8:**
+  - the Session must watch the `/feedback` heartbeat;
+  - it must decide what a missed-heartbeat timeout does. For example, it could release Screen and Speaker ownership after about 15 s but hold the connection a while longer so a returning Sender still recovers seamlessly, or it could end the Session.
+  - These traces are the fixtures: the short outage must not end anything, and a long one must.
+
 ### Not testable here
 
 - **Snapcast audio focus:** stock Snapcast isn't installed on the Portal 10" or the Portal TV.
 
 ### Still to do
 
-- First-connect delay to a sleeping Portal.
-- Device trace: Sender walks out of Wi-Fi range.
+- A truly sleeping Portal (nobody in view of the camera).
 - Re-run the screensaver case with a screen-on wake in the probe.

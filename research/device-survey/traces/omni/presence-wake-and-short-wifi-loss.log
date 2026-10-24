@@ -1,0 +1,13 @@
+0.000 1194 2102 I PowerManagerService: Going to sleep due to sleep_button (uid 1000)...
+0.949 1194 1194 I screen_toggled: 0
+8.780 1194 3027 I PowerManagerService: Waking up from Dozing (uid=10004, reason=WAKE_REASON_APPLICATION, details=Full_Wakeup_PresenceManager)...
+8.781 1194 3027 I PowerManagerService: Waking up from screen off, start dreaming...
+8.782 1194 1194 I screen_toggled: 1
+60.705 9587 9617 I AirPlayService: Client connected (1)
+61.275 9587 9617 I AirPlayNative: Oboe out: AAudio, mmap=no, buffer=3536/3536 frames, burst=1768, 44100 Hz
+61.344 9587 9617 I AirPlayService: Audio mode
+61.347 9587 9617 I AirPlayService: Audio format: ct=2 spf=352 screen=false
+61.351 9587 12740 I AirPlayService: DACP: <dacp-id>
+61.401 9587 12740 I AirPlayNative: audio_flush
+61.719 9587 9614 I DacpController: DACP resolved: <lan-ip>
+167.483 (end of capture: no further receiver events through the Wi-Fi outage and recovery)

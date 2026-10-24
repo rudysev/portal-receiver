@@ -1,0 +1,15 @@
+# Times relative to when the user reported the Sender's Wi-Fi off (the switch-off itself was a few seconds earlier). Wi-Fi back on after about 3 minutes; music recovered by itself.
+-59.2 9587 9617 I AirPlayService: Client connected (1)
+-58.8 9587 9617 I AirPlayNative: Oboe out: AAudio, mmap=no, buffer=3536/3536 frames, burst=1768, 44100 Hz
+-58.7 9587 9617 I AirPlayService: Audio mode
+-58.7 9587 9617 I AirPlayService: Audio format: ct=2 spf=352 screen=false
+-58.7 9587 16994 I AirPlayService: DACP: <dacp-id>
+-58.7 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+-58.7 9587 16994 I AirPlayNative: audio_flush
+-58.6 9587 9614 I DacpController: DACP resolved: <lan-ip>
+-56.7 2210 2505 I ImmortalNowPlaying: now-playing: — —
+-56.6 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+-56.6 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+-54.7 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
+-54.6 2210 2505 I ImmortalNowPlaying: now-playing: PLAYING Austin Wintory — Apotheosis
++206.0 (end of capture: no receiver or now-playing events after -54.6, through the outage and the recovery)
