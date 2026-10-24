@@ -1,12 +1,12 @@
-# portal-airplay
+# Portal Receiver
 
 An AirPlay receiver for Meta Portal devices, shipped as its own GPL-3.0 app and integrated with the Immortal launcher at arm's length.
 
 ## Language
 
 **Receiver**:
-The portal-airplay app: the program on a Portal that accepts AirPlay streams. It works on its own, with or without Immortal installed.
-_Avoid_: server, AirPlay server, portal-receiver (the retired predecessor)
+The Portal Receiver app: the program on a Portal that accepts AirPlay streams. It works on its own, with or without Immortal installed.
+_Avoid_: server, AirPlay server, prototype (the archived proof of concept, portal-receiver-prototype)
 
 **Sender**:
 The Apple device (iPhone, iPad, Mac) that streams to the Receiver.
