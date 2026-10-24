@@ -1,6 +1,6 @@
-# Licence obligations of the portal-airplay APK, and what keeps Immortal at arm's length
+# Licence obligations of the portal-receiver APK, and what keeps Immortal at arm's length
 
-Research for [rudysev/portal-airplay#3](https://github.com/rudysev/portal-airplay/issues/3).
+Research for [rudysev/portal-receiver#3](https://github.com/rudysev/portal-receiver/issues/3).
 Researched 2026-10-23 against primary sources (licence texts, the FSF GPL FAQ, each
 dependency's own licence files at the commits named below, Android developer docs, Apple's
 trademark guidelines, 17 U.S.C. 1201).
@@ -30,12 +30,12 @@ concretely, because the project needs decisions; where the law is genuinely open
    GPL-compatible, so the receiver can include it, and it stays MIT inside immortal.apk.
 5. **Listing and one-tap-installing the APK creates no licence obligation on Immortal's code.**
    An installer and the programs it installs are separate works (FSF FAQ), and the APK is
-   downloaded from portal-airplay's own release page, where the source sits next to it. The
+   downloaded from portal-receiver's own release page, where the source sits next to it. The
    catalog already lists GPL apps (AntennaPod, Snapcast, VLC).
 6. **Two non-copyright risk flags.** (a) FairPlay: `playfair` is reverse-engineered,
    anonymously authored code that UxPlay itself calls of "unclear" legal status; a DMCA
    s.1201 interoperability defence exists but is untested for it. It has shipped openly since
-   2015, including in Debian main and F-Droid. (b) Trademark: **"portal-airplay" puts Apple's
+   2015, including in Debian main and F-Droid. (b) Trademark: **"portal-receiver" puts Apple's
    AirPlay mark in the product name, which Apple's guidelines forbid.** Rename the app, and use
    AirPlay only in a referential phrase ("a receiver for AirPlay") with an attribution notice.
 
@@ -52,7 +52,7 @@ and the source of libraries "that the work is specifically designed to require"
 ([GPL-3.0 s.1](../LICENSE)). It excludes the work's System Libraries and "general-purpose tools
 or generally available free programs which are used unmodified" in building it (same section).
 
-For portal-airplay that means the source tarball must contain:
+For portal-receiver that means the source tarball must contain:
 
 | Item | Why it is in scope |
 |---|---|
@@ -97,11 +97,11 @@ deleted" ([GitHub Docs: downloading source code archives](https://docs.github.co
 **Recommended release recipe** (each item traces to the citations above):
 
 1. Tag the release. CI builds the APK from that tag.
-2. CI also builds `portal-airplay-<version>-source.tar.gz`: the tagged tree plus every submodule's
+2. CI also builds `portal-receiver-<version>-source.tar.gz`: the tagged tree plus every submodule's
    files at its pinned commit, the downloaded OpenSSL source tarball, and the patch files. Attach
    it to the same Release as the APK.
 3. The release notes say, next to the APK: "Complete corresponding source:
-   `portal-airplay-<version>-source.tar.gz` (this release)." That is the s.6(d) "clear directions".
+   `portal-receiver-<version>-source.tar.gz` (this release)." That is the s.6(d) "clear directions".
 4. Never delete a release's source asset while its APK asset is still downloadable. The catalog
    entry's `releases/latest/download/...` URL always resolves to the newest APK, whose release
    carries the matching source.
@@ -258,12 +258,12 @@ the program can legally authorize this exception" (same entry).
   ([Immortal SUBMISSIONS.md](https://github.com/starbrightlab/immortal/blob/640ed8b43e3c6f34b0de80dd62bd795171cc668d/SUBMISSIONS.md),
   [docs/features/app-store.md](https://github.com/starbrightlab/immortal/blob/640ed8b43e3c6f34b0de80dd62bd795171cc668d/docs/features/app-store.md)).
   The bundled offline catalog is JSON metadata, not APKs. The device downloads the APK from
-  portal-airplay's GitHub Release, which carries the source tarball, so s.6(d) is satisfied at the
+  portal-receiver's GitHub Release, which carries the source tarball, so s.6(d) is satisfied at the
   place the copy actually comes from.
 - **Even on the broadest reading** ("convey" means "any kind of propagation that enables other
   parties to make or receive copies", [GPL-3.0 s.0](../LICENSE)), anyone pointing users at the APK
   can rely on the same designated place offering the source (s.6(d)). Belt and braces: set the
-  catalog entry's `homepage` to the portal-airplay repo.
+  catalog entry's `homepage` to the portal-receiver repo.
 - **Precedent:** the catalog already lists GPL apps: AntennaPod (GPL-3.0), Snapcast (snapdroid,
   GPL-3.0), VLC (GPL-2.0) ([catalog.json @640ed8b](https://github.com/starbrightlab/immortal/blob/640ed8b43e3c6f34b0de80dd62bd795171cc668d/catalog.json);
   licences per GitHub metadata of [AntennaPod](https://github.com/AntennaPod/AntennaPod),
@@ -307,10 +307,10 @@ the program can legally authorize this exception" (same entry).
   That is evidence of tolerance, not a licence.
 - **What this means in practice.** The realistic worst case is a takedown request against the repo
   or release, not a claim against users. It is the same exposure every open AirPlay mirroring
-  receiver has. Keep the FairPlay code byte-identical to upstream (no portal-airplay authorship of
+  receiver has. Keep the FairPlay code byte-identical to upstream (no portal-receiver authorship of
   circumvention logic), don't market the app around DRM or protected content, and carry a
   disclaimer and contact line like UxPlay's. Because Immortal never contains or distributes the
-  receiver (sections 3-4), a takedown would hit portal-airplay, not immortal.apk; the catalog entry
+  receiver (sections 3-4), a takedown would hit portal-receiver, not immortal.apk; the catalog entry
   would simply be removed.
 - **If shairport-sync is chosen:** it also contains a hard-coded RSA private key
   (`super_secret_key` in [`common.c`](https://github.com/mikebrady/shairport-sync/blob/b991d91350e537c1f50dac98d9a3c836eceddcfc/common.c))
@@ -319,7 +319,7 @@ the program can legally authorize this exception" (same entry).
   and the same mitigations apply. UxPlay does not answer `Apple-Challenge` (no occurrence of
   `Apple-Challenge` or an embedded RSA private key in its tree at `95a0e49`, checked by grep).
 
-### 5.2 Apple's AirPlay trademark and the name "portal-airplay"
+### 5.2 Apple's AirPlay trademark and the name "portal-receiver"
 
 - AirPlay(R) and FairPlay(R) are on Apple's trademark list
   ([Apple trademark list](https://www.apple.com/legal/intellectual-property/trademark/appletmlist.html)).
@@ -333,7 +333,7 @@ the program can legally authorize this exception" (same entry).
   prominent than the product name", and nothing implies endorsement (same page, "Compatibility").
   Add the attribution "AirPlay is a trademark of Apple Inc., registered in the U.S. and other
   countries" (same page, "Proper Trademark Notice and Attribution").
-- **Conclusion: rename before the first release.** "portal-airplay" as the app name, launcher label,
+- **Conclusion: rename before the first release.** "portal-receiver" as the app name, launcher label,
   repo name or package name puts the mark in the product name. The other open receivers avoid it
   (UxPlay, RPiPlay, shairport-sync); jqssun's F-Droid app is labelled "AirPlay Server"
   ([fdroiddata metadata](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/io.github.jqssun.airplay.yml)),
@@ -360,7 +360,7 @@ territory. Prefer the platform's MediaCodec AAC decoder where it exists.
 
 ## Open questions surfaced for the map
 
-1. **App name.** "portal-airplay" conflicts with Apple's trademark guidelines. Needs a new name
+1. **App name.** "portal-receiver" conflicts with Apple's trademark guidelines. Needs a new name
    (repo, app label, package name) before any release. Probably a small grilling ticket; it also
    touches GLOSSARY.md and the catalog entry.
 2. **Release pipeline as a spec item.** The complete-source tarball (submodules + OpenSSL tarball +
@@ -368,5 +368,5 @@ territory. Prefer the platform's MediaCodec AAC decoder where it exists.
    spec. GitHub's auto-archives are not compliant on their own.
 3. **nqptp**, only if the library ticket picks shairport-sync for AirPlay 2: GPL-2.0-only, so it
    needs a decision (reimplement, separate binary with a thin interface, or ask for relicensing).
-4. **Contract repository and licence header.** Where the MIT contract files live (in portal-airplay,
+4. **Contract repository and licence header.** Where the MIT contract files live (in portal-receiver,
    in Immortal, or a tiny third repo) and who holds the copyright: belongs to the contract ticket.
