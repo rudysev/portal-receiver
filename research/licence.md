@@ -35,7 +35,7 @@ concretely, because the project needs decisions; where the law is genuinely open
 6. **Two non-copyright risk flags.** (a) FairPlay: `playfair` is reverse-engineered,
    anonymously authored code that UxPlay itself calls of "unclear" legal status; a DMCA
    s.1201 interoperability defence exists but is untested for it. It has shipped openly since
-   2015, including in Debian main and F-Droid. (b) Trademark: **"portal-receiver" puts Apple's
+   2015, including in Debian main and F-Droid. (b) Trademark: **"portal-airplay" (the working name) puts Apple's
    AirPlay mark in the product name, which Apple's guidelines forbid.** Rename the app, and use
    AirPlay only in a referential phrase ("a receiver for AirPlay") with an attribution notice.
 
@@ -319,7 +319,7 @@ the program can legally authorize this exception" (same entry).
   and the same mitigations apply. UxPlay does not answer `Apple-Challenge` (no occurrence of
   `Apple-Challenge` or an embedded RSA private key in its tree at `95a0e49`, checked by grep).
 
-### 5.2 Apple's AirPlay trademark and the name "portal-receiver"
+### 5.2 Apple's AirPlay trademark and the name "portal-airplay" (the working name)
 
 - AirPlay(R) and FairPlay(R) are on Apple's trademark list
   ([Apple trademark list](https://www.apple.com/legal/intellectual-property/trademark/appletmlist.html)).
@@ -333,7 +333,7 @@ the program can legally authorize this exception" (same entry).
   prominent than the product name", and nothing implies endorsement (same page, "Compatibility").
   Add the attribution "AirPlay is a trademark of Apple Inc., registered in the U.S. and other
   countries" (same page, "Proper Trademark Notice and Attribution").
-- **Conclusion: rename before the first release.** "portal-receiver" as the app name, launcher label,
+- **Conclusion: rename before the first release.** "portal-airplay" as the app name, launcher label,
   repo name or package name puts the mark in the product name. The other open receivers avoid it
   (UxPlay, RPiPlay, shairport-sync); jqssun's F-Droid app is labelled "AirPlay Server"
   ([fdroiddata metadata](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/io.github.jqssun.airplay.yml)),
@@ -360,7 +360,7 @@ territory. Prefer the platform's MediaCodec AAC decoder where it exists.
 
 ## Open questions surfaced for the map
 
-1. **App name.** "portal-receiver" conflicts with Apple's trademark guidelines. Needs a new name
+1. **App name.** "portal-airplay" conflicts with Apple's trademark guidelines. Needs a new name
    (repo, app label, package name) before any release. Probably a small grilling ticket; it also
    touches GLOSSARY.md and the catalog entry.
 2. **Release pipeline as a spec item.** The complete-source tarball (submodules + OpenSSL tarball +
