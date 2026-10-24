@@ -1,0 +1,107 @@
+0.000 9587 9617 I AirPlayService: Client connected (1)
+0.115 9587 9617 I AirPlayNative: mirror running: 1
+0.207 9587 10146 I AirPlayService: Video size: 370.0x800.0 -> 370.0x800.0
+0.209 9587 10146 I AirPlayNative: video_set_codec: 1 (h265_enabled=1)
+5.727 9587 9617 I AirPlayNative: Oboe out: AAudio, mmap=no, buffer=1920/3844 frames, burst=960, 44100 Hz
+5.736 9587 9617 I AirPlayService: Audio format: ct=8 spf=480 screen=true
+5.744 9587 10151 I AirPlayService: DACP: <dacp-id>
+5.755 9587 9614 I DacpController: DACP resolved: <lan-ip>
+9.969 9587 9617 I AirPlayService: Client connected (2)
+9.985 9587 10146 I AirPlayNative: mirror running: 0
+9.987 9587 10146 I AirPlayService: Audio mode
+10.043 9587 9617 I AirPlayService: Client connected (3)
+10.110 9587 9617 I AirPlayNative: video_reset 5
+12.092 9587 9617 I AirPlayNative: video_play: http://localhost:7000/master.m3u8 @ 0.00s
+12.093 9587 9617 I AirPlayService: AirPlay Video play: http://localhost:7000/master.m3u8 @ 0.0s
+12.121 9587 9587 I ExoPlayerImpl: Init
+22.099 9587 9617 I AirPlayService: Client connected (4)
+22.105 9587 9617 I AirPlayService: Client connected (5)
+22.136 9587 9617 I AirPlayService: Client disconnected (4)
+22.140 9587 9617 I AirPlayNative: video_flush
+22.368 9587 9617 I AirPlayService: Client connected (5)
+36.454 9587 9617 I AirPlayService: AirPlay Video stopped
+36.455 9587 9587 I ExoPlayerImpl: Release
+36.468 9587 9617 I AirPlayService: Client disconnected (4)
+36.472 9587 9617 I AirPlayNative: video_flush
+36.474 9587 9617 I AirPlayNative: mirror running: 1
+36.475 9587 9617 I AirPlayService: Mirror mode
+36.481 9587 9617 I AirPlayService: Client disconnected (3)
+36.486 9587 9617 I AirPlayNative: video_flush
+36.576 9587 10211 I AirPlayService: Video size: 370.0x800.0 -> 370.0x800.0
+36.580 9587 10211 I AirPlayNative: video_set_codec: 1 (h265_enabled=1)
+36.643 9587 9617 I AirPlayService: Client connected (4)
+36.647 9587 10211 I AirPlayNative: mirror running: 0
+36.649 9587 10211 I AirPlayService: Audio mode
+36.699 9587 9617 I AirPlayService: Client connected (5)
+36.762 9587 9617 I AirPlayNative: video_reset 5
+38.892 9587 9617 I AirPlayNative: video_play: http://localhost:7000/master.m3u8 @ 0.00s
+38.893 9587 9617 I AirPlayService: AirPlay Video play: http://localhost:7000/master.m3u8 @ 0.0s
+38.894 9587 9587 I ExoPlayerImpl: Init
+48.900 9587 9617 I AirPlayService: Client disconnected (4)
+48.903 9587 9617 I AirPlayNative: video_flush
+49.058 9587 9617 I AirPlayService: Client connected (5)
+66.044 9587 9617 I AirPlayService: AirPlay Video stopped
+66.045 9587 9587 I ExoPlayerImpl: Release
+66.065 9587 9617 I AirPlayService: Client disconnected (4)
+66.068 9587 9617 I AirPlayNative: video_flush
+66.068 9587 9617 I AirPlayService: Client disconnected (3)
+66.071 9587 9617 I AirPlayNative: video_flush
+66.072 9587 9617 I AirPlayNative: mirror running: 1
+66.073 9587 9617 I AirPlayService: Mirror mode
+66.154 9587 10300 I AirPlayService: Video size: 370.0x800.0 -> 370.0x800.0
+66.158 9587 10300 I AirPlayNative: video_set_codec: 1 (h265_enabled=1)
+66.350 9587 9617 I AirPlayService: Client connected (4)
+66.353 9587 10300 I AirPlayNative: mirror running: 0
+66.354 9587 10300 I AirPlayService: Audio mode
+66.391 9587 9617 I AirPlayService: Client connected (5)
+66.442 9587 9617 I AirPlayNative: video_reset 5
+68.259 9587 9617 I AirPlayNative: video_play: http://localhost:7000/master.m3u8 @ 0.00s
+68.260 9587 9617 I AirPlayService: AirPlay Video play: http://localhost:7000/master.m3u8 @ 0.0s
+68.261 9587 9587 I ExoPlayerImpl: Init
+78.268 9587 9617 I AirPlayService: Client disconnected (4)
+78.273 9587 9617 I AirPlayNative: video_flush
+78.415 9587 9617 I AirPlayService: Client connected (5)
+107.086 9587 9587 I AirPlayService: AirPlay Video stopped (player)
+107.091 9587 9587 I ExoPlayerImpl: Release
+107.496 9587 9617 I AirPlayNative: video_reset 2
+107.496 9587 9617 I AirPlayService: Client disconnected (4)
+107.497 9587 9617 I AirPlayNative: video_flush
+107.497 9587 9617 I AirPlayService: Client disconnected (3)
+107.499 9587 9617 I AirPlayNative: video_flush
+107.499 9587 9617 I AirPlayService: Client disconnected (2)
+107.502 9587 9617 I AirPlayNative: video_flush
+107.503 9587 9617 I AirPlayService: Client disconnected (1)
+107.506 9587 9617 I AirPlayNative: video_flush
+108.521 9587 9617 I AirPlayService: Client connected (2)
+108.574 9587 9617 I AirPlayService: Client connected (3)
+108.612 9587 9617 I AirPlayService: Client disconnected (2)
+108.616 9587 9617 I AirPlayNative: video_flush
+108.617 9587 9617 I AirPlayService: Client disconnected (1)
+108.619 9587 9617 I AirPlayNative: video_flush
+108.708 9587 9617 I AirPlayService: Client disconnected (0)
+108.711 9587 9617 I AirPlayNative: video_flush
+206.529 9587 9617 I AirPlayService: Client connected (1)
+206.645 9587 9617 I AirPlayNative: mirror running: 1
+206.751 9587 10504 I AirPlayService: Video size: 370.0x800.0 -> 370.0x800.0
+206.755 9587 10504 I AirPlayNative: video_set_codec: 1 (h265_enabled=1)
+207.423 9587 9617 I AirPlayService: Client connected (2)
+207.434 9587 10504 I AirPlayNative: mirror running: 0
+207.436 9587 10504 I AirPlayService: Audio mode
+207.508 9587 9617 I AirPlayService: Client connected (3)
+207.566 9587 9617 I AirPlayNative: video_reset 5
+208.570 9587 9617 I AirPlayService: Client disconnected (2)
+208.573 9587 9617 I AirPlayNative: video_flush
+208.575 9587 9617 I AirPlayNative: mirror running: 1
+208.576 9587 9617 I AirPlayService: Mirror mode
+208.581 9587 9617 I AirPlayService: Client disconnected (1)
+208.583 9587 9617 I AirPlayNative: video_flush
+208.660 9587 10505 I AirPlayService: Video size: 370.0x800.0 -> 370.0x800.0
+208.664 9587 10505 I AirPlayNative: video_set_codec: 1 (h265_enabled=1)
+211.970 9587 9617 I AirPlayService: Client connected (2)
+211.983 9587 10505 I AirPlayNative: mirror running: 0
+211.985 9587 10505 I AirPlayService: Audio mode
+212.035 9587 9617 I AirPlayService: Client connected (3)
+212.087 9587 9617 I AirPlayNative: video_reset 5
+212.713 9587 9617 I AirPlayNative: video_play: http://localhost:7000/master.m3u8 @ 21.11s
+212.714 9587 9587 I ExoPlayerImpl: Init
+212.714 9587 9617 I AirPlayService: AirPlay Video play: http://localhost:7000/master.m3u8 @ 21.114424s

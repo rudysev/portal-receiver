@@ -90,9 +90,27 @@ The probe was switched off `auto_res` to a fixed advertised size, then mirrored 
 
 The probe was left advertising 1280x800 with launch-on-connect on for the remaining tests.
 
-### Still to do (needs a Sender)
+### Test 3: YouTube Handover and ad breaks
 
-- The mirroring -> AirPlay video Handover with YouTube, including the ad-break decoder fault.
+Trace: [`traces/omni/youtube-handover-ads.log`](traces/omni/youtube-handover-ads.log) (times relative to connect). Probe advertising 1280x800.
+
+- **The Handover works.** Mirroring stops (`mirror running: 0`, `video_reset 5` = `RESET_TYPE_RTP_TO_HLS_TEARDOWN`) and about 2.1 s later the Sender issues `video_play: http://localhost:7000/master.m3u8`, played through ExoPlayer (HLS). Skipping ads, pause and resume, and seeking all worked. **No ad-break decoder fault** was seen on this build.
+- **Each ad and each video is its own play.** The Sender stops one HLS item, briefly returns to mirroring (`Mirror mode`, new mirror codec), and then sends the next `video_play`, 2.2-2.4 s between items. The "Session" spans all of them.
+- **Bug: the Session drops if an item ends on the Portal before the Sender moves on.** The user let a video end and started a new one. Its first ad played to the end, and the connection dropped before the second ad loaded:
+
+  ```
+  68.259   video_play: http://localhost:7000/master.m3u8 @ 0.00s     <- first ad of the new video
+  107.086  AirPlay Video stopped (player)                            <- ExoPlayer hit end-of-stream; probe stops the player
+  107.496  video_reset 2                                             <- RESET_TYPE_HLS_SHUTDOWN
+  107.497  Client disconnected (4) ... (3) ... (2) ... (1)           <- every connection closed
+  ```
+
+  In every transition that worked, the Sender stopped the item itself ("AirPlay Video stopped" without "(player)") and then sent the next one. Here the local player reached end-of-stream first. The probe's `onEnded` called `_endVideoPlayback` (`AirPlayService.kt:277`), which stops the player. The Sender's next `/playback-info` poll then got `duration == -1`, which UxPlay treats as "video has finished, reset": it marks the response to disconnect and resets with `RESET_TYPE_HLS_SHUTDOWN` (`lib/http_handlers.h:391-398` in UxPlay 1.73.7). That tears down the Sender's whole connection, so the queued second ad never arrives. **Lessons:**
+  - For the Session (#6), the end of an HLS item on the Portal is not the end of the Session. The Sender owns the queue: on local end-of-stream the Receiver keeps reporting the finished item (position = duration, rate 0) and waits for the Sender's next `/play` or `/stop`, inside #6's grace window.
+  - For the engine patch series, `/playback-info` must never answer `duration -1` while the Sender's item is still current. This is a candidate patch to `patches/uxplay/`, alongside the inherited 0001-0005, and is worth offering upstream.
+  - This trace is the fixture for it.
+
+### Still to do (needs a Sender)
 - Whether stock Snapcast pauses on losing audio focus.
 - First-connect delay to a sleeping Portal; discovery after a Wi-Fi reconnect.
 - Rotation and scaling: portrait iPhone mirroring, landscape video.
