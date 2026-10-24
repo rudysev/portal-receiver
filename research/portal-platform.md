@@ -1,6 +1,6 @@
 # Portal platform constraints for an always-on AirPlay receiver
 
-Research for [rudysev/portal-airplay#4](https://github.com/rudysev/portal-airplay/issues/4):
+Research for [rudysev/portal-receiver#4](https://github.com/rudysev/portal-receiver/issues/4):
 *What Portal platform constraints shape an always-on, third-party AirPlay receiver app?*
 
 The Receiver is a standalone GPL-3.0 app (Kotlin + NDK, arm64). It runs on Portal+ Gen1, the Gen2
@@ -27,7 +27,7 @@ Device shorthand:
 | **TV** | Portal TV (remote only, HDMI) | 9 / 28 | `ripley` |
 
 Codename sources: `aloha` and `cipher` in `immortal/docs/design/camera-streaming.md:75`;
-`omni` in `portal-receiver/IMMORTAL-PORT.md:271`; `ripley` in
+`omni` in `portal-receiver-prototype/IMMORTAL-PORT.md:271`; `ripley` in
 `immortal/app/src/main/java/com/immortal/launcher/settings/SettingsDomains.kt:64-66`. API levels:
 `immortal/SUBMISSIONS.md:68-71`.
 
@@ -37,7 +37,7 @@ Codename sources: `aloha` and `cipher` in `immortal/docs/design/camera-streaming
 |---|---|---|
 | `immortal/...` | Immortal launcher, read-only local checkout. Kotlin paths below are relative to `app/src/main/java/com/immortal/launcher/` unless the path says otherwise. | `640ed8b` |
 | `PR170/...` | [starbrightlab/immortal#170](https://github.com/starbrightlab/immortal/pull/170), the in-process prototype | head `30cb3ca` |
-| `receiver/...` | `rudysev/portal-receiver` (private), the standalone staging app | `42694bb` |
+| `receiver/...` | `rudysev/portal-receiver-prototype` (private), the standalone staging app | `42694bb` |
 | upstream | [jqssun/android-airplay-server](https://github.com/jqssun/android-airplay-server), which `receiver` vendors at `b9a590f` | checked 2026-10-23 |
 | AOSP Q | `frameworks/base` `android10-release` branch, `services/core/java/com/android/server/wm/` | branch head, 2026-10-23 |
 
@@ -189,7 +189,7 @@ Codename sources: `aloha` and `cipher` in `immortal/docs/design/camera-streaming
   boot launches and the headless installer dialog. The provisioning kit grants it with
   `appops set <pkg> SYSTEM_ALERT_WINDOW allow`. Source: `immortal/provisioning/provision.sh:319-323`;
   `immortal/app/src/main/AndroidManifest.xml:65-69`; `immortal/HeadlessInstaller.kt:24-27`.
-  portal-receiver's `setup.sh` grants the same op to itself over ADB
+  portal-receiver-prototype's `setup.sh` grants the same op to itself over ADB
   (`receiver/setup.sh:26-28`).
 - **[I G2]** A Receiver installed from the Store has no ADB step, so it gets no
   `SYSTEM_ALERT_WINDOW` grant. Portal's on-device "install unknown apps" toggle is non-functional
@@ -249,7 +249,7 @@ Codename sources: `aloha` and `cipher` in `immortal/docs/design/camera-streaming
   `immortal/RemoteDiscovery.kt:19-31,121-124`; `immortal/docs/features/remote.md:28-30`. There
   is no evidence of Portal-specific NSD quirks beyond the multicast lock.
 - **[V G2]** The advertised name must not be hardcoded. The old fork baked in "Portal Plus", so
-  every device on a LAN advertised the same name. portal-receiver seeds it from `Build.MODEL`
+  every device on a LAN advertised the same name. portal-receiver-prototype seeds it from `Build.MODEL`
   instead (`receiver/app/.../AirPlayApp.kt:29-44`). Immortal's device name is
   `FleetConfig.name`, which defaults to `Build.MODEL` (`immortal/FleetConfig.kt:51`). PR #170
   re-registered mDNS on rename (`PR170/docs/features/airplay.md:24-28`).
@@ -446,7 +446,7 @@ These are the precedents the Contract can build on.
 
 - **[V TV]** The stock TV home (`ripleyhome`) lists only apps with a `LEANBACK_LAUNCHER`
   category, and shows them with a 320x180 banner. It *hides* apps that also carry
-  `CATEGORY_HOME`. Source: `immortal/app/src/main/AndroidManifest.xml:113-156`. portal-receiver
+  `CATEGORY_HOME`. Source: `immortal/app/src/main/AndroidManifest.xml:113-156`. portal-receiver-prototype
   already declares `LEANBACK_LAUNCHER` and a banner, with `leanback`/`touchscreen`/`faketouch`
   marked not required (`receiver/app/src/main/AndroidManifest.xml:16-18,33,44-48`).
 - **[V TV]** The remote is a Bluetooth HID device (vendor 0x1915, product 0xeeee). Netflix sends
@@ -457,7 +457,7 @@ These are the precedents the Contract can build on.
   transport keys on the remote are not documented.
 - **[V TV]** No touch. Every interactive element needs D-pad focus with a visible ring. Immortal's
   `TvFocus` (`tvFocusable`, `rememberInitialFocus`) is its pattern (`immortal/TvFocus.kt:33-119`;
-  `immortal/docs/features/portal-tv.md:7-9`). portal-receiver ships its own `ui/TvFocus.kt` and
+  `immortal/docs/features/portal-tv.md:7-9`). portal-receiver-prototype ships its own `ui/TvFocus.kt` and
   `ui/Tv.kt` (file list at `42694bb`). Neither has been verified on a TV.
 - **[V TV]** Chrome renders blank on the TV and cannot be driven by the remote
   (`immortal/Curation.kt:40-48`). **[I]** Avoid WebView-based UI in the Receiver.
