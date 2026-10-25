@@ -7,8 +7,8 @@ What each Portal model can actually do as a receiver, measured on real hardware 
 | Model | Codename | Android | Available | Status |
 | --- | --- | --- | --- | --- |
 | Portal 10" (Gen2) | `omni` | 10 (API 29) | yes, USB to the survey Mac | done, except a truly sleeping Portal |
-| Portal+ (Gen1) | `aloha` | 9 (API 28) | yes, on another machine | not started |
-| Portal TV | `ripley` | 9 (API 28) | yes, Wi-Fi adb from the survey Mac | non-interactive part done; probe not installed |
+| Portal+ (Gen1) | `aloha` | 9 (API 28) | in use, not surveyed this session | not started; still settles the Gen1 conflict |
+| Portal TV | `ripley` | 9 (API 28) | yes, Wi-Fi adb from the survey Mac | non-interactive part done; probe installed, interactive tests deferred |
 | Portal+ (Gen2), Mini, Go | | 10 | not available | won't be surveyed |
 
 A "Portal+" receiver is also advertising on the survey LAN (192.168.86.74, `Android-2.local`) running the probe; it has no adb over Wi-Fi.
@@ -150,7 +150,7 @@ The user turned the iPhone's Wi-Fi off during an audio Session (a stand-in for w
 
 ## Portal TV (`ripley`)
 
-Measured 2026-10-24 over Wi-Fi adb. Build `Facebook/ripley_prod/ripley:9/PKQ1.191202.001/2041515800015050:user/prod-keys`, Android 9 (API 28), Qualcomm `msm8998` (Snapdragon 835), ABIs `arm64-v8a,armeabi-v7a,armeabi`. **The probe isn't installed**, so the interactive tests haven't run here yet.
+Measured 2026-10-24 over Wi-Fi adb. Build `Facebook/ripley_prod/ripley:9/PKQ1.191202.001/2041515800015050:user/prod-keys`, Android 9 (API 28), Qualcomm `msm8998` (Snapdragon 835), ABIs `arm64-v8a,armeabi-v7a,armeabi`. **Interactive tests deferred** at the user's request. The probe (the same APK as on the Portal 10", `com.portal.receiver` 0.0.16) is installed and set up ready for them: `SYSTEM_ALERT_WINDOW` granted, launched once, `launch_on_connect=true`, advertising a fixed 1920x1080 as **"PortalTV"**. Both `_airplay._tcp` and `_raop._tcp` registered (`NsdServiceManager: AirPlay registered: PortalTV`) and the TV answers mDNS queries.
 
 - **Decoders** (`/vendor/etc/media_codecs.xml` and `media_codecs_vendor.xml`, identical): hardware `OMX.qcom.video.decoder.hevc`, `.avc` and `.vp9` at up to 4096x2160 and 240 fps (secure variants at 3840x2160 and 30 fps), plus Google software fallbacks. Audio: AAC, FLAC (also `OMX.qti.audio.decoder.flac`). **No ALAC decoder**, the same as Gen2.
 - **Display:** HDMI mode 3840x2160 at 60 Hz (the only mode), with the UI running at an override of **1920x1080** at 320 dpi and scaled up. By Test 2d's lesson, the advertisement should be the logical 1920x1080, with no rotation to handle. Whether advertising the full 3840x2160 works better (4K mirroring, and HEVC if the >1080p hypothesis holds) is a test for when the probe is installed.
